@@ -1,0 +1,12 @@
+---
+- name: Example of ping all nodes in ansible-navigator
+  hosts: all
+  become: true
+  tasks:
+    - name: Pinging all nodes
+      ansible.builtin.ping:
+      register: result
+    - name: print the result
+      ansible.builtin.debug:
+        msg: "{{ result }}"
+...
