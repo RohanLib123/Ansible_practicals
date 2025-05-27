@@ -1,0 +1,15 @@
+---
+- name: Example of failed_when 
+  hosts: all
+  become: true
+  tasks:
+    - name: Checking compatibility of machine
+      debug:
+        msg: "This is incompatible machine"
+      failed_when: ansible_distribution == 'RedHat'
+    - name: Install apache2
+      apt:
+        name: apache2
+        state: latest
+...
+

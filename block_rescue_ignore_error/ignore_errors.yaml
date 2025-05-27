@@ -1,0 +1,22 @@
+---
+- name: Example of ignoring errors
+  hosts: rhel
+  become: true
+  tasks:
+    - name: checking the status of  cockpit.socket service
+      command: systemctl is-active cockpit.socket
+      register: abc
+      ignore_errors: yes
+    - debug:
+       msg: "{{ abc }}"
+    - name: starting the cockpit.socket service
+      service:
+        name: cockpit.socket
+        state: started
+      when: abc.rc != 0
+    - name: Restaring the cockpit.socket service
+      service:
+        name: cockpit.socket
+        state: restarted
+      when: abc.rc == 0
+...
