@@ -1,0 +1,13 @@
+---
+- name: example of mount module
+  hosts: 192.168.159.135
+  become: true
+  tasks:
+    - name: Mount DVD sr0 Read-only
+      mount:
+        path: /tmp
+        src: /dev/sr0
+        fstype: iso9660
+        opts: ro
+        state: mounted
+...

@@ -1,0 +1,13 @@
+---
+- name: example of parted module to create partition with required size and filesystem
+  hosts: 192.168.159.135
+  become: true
+  tasks:
+    - name: Creating partition on /dec/nvme0n2 with size and filesystem
+      parted:
+        device: /dev/nvme0n2
+        number: 1
+        part_end: 1GiB
+        fs_type: ext4
+        state: present
+...

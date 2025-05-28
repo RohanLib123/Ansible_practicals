@@ -1,0 +1,13 @@
+---
+- name: Example of creating partition for lvm using parted module and flags
+  hosts: 192.168.159.135
+  become: true
+  tasks:
+    - name: creating partition for lvm on /dev/nvme0n2
+      parted: 
+        device: /dev/nvme0n2
+        number: 2
+        flags: [ lvm ]
+        state: present
+        part_start: 1GiB
+...

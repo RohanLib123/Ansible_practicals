@@ -1,0 +1,10 @@
+---
+- name: Example of erasing existing file system from partiton using filesystem module
+  hosts: 192.168.159.135
+  become: true
+  tasks:
+    - name: creating blank filesystem / earsing old file system from /dev/nvme0n2p1
+      filesystem:
+        dev: /dev/nvme0n2p1
+        state: absent
+...

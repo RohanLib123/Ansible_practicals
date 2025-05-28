@@ -1,0 +1,17 @@
+---
+- name: Example of create partion using gpt (GUID partition table)
+  hosts: 192.168.159.135
+  become: true 
+  tasks:
+    - name: create partition using gpt on /dev/nvme0n2
+      parted:
+        label: gpt
+        device: /dev/nvme0n2
+        number: 6
+        state: present
+        name: p1
+        flags: [ lvm ]
+        part_start: 0%
+        part_end: 15%
+        unit: '%'
+

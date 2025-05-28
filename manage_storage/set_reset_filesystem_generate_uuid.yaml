@@ -1,0 +1,11 @@
+---
+- name: Example of set/reset xfs filesystem and generate UUID 
+  hosts: 192.168.159.135
+  become: true
+  tasks:
+    - name: Set/Reset xfs filesystem UUID generate on /dev/nvme0n2p1
+      filesystem:
+        dev: /dev/nvme0n2p1
+        fstype: xfs
+        uuid: generate
+...

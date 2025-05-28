@@ -1,0 +1,17 @@
+---
+- name: Example deleting old partition and creating new partition at the end of the disk 
+  hosts: 192.168.159.135
+  become: true
+  tasks:
+    - name: deleting old partition from /dev/nvme0n2
+      parted:
+        device: /dev/nvme0n2
+        number: 2
+        state: absent
+    - name: creating new partition at the end of the /dev/nvme0n2 disk
+      parted:
+        device: /dev/nvme0n2
+        number: 3
+        part_start: -1GiB
+        state: present
+...

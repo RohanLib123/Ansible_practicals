@@ -1,0 +1,12 @@
+---
+- name: example of manage storage on managed nodes using parted module
+  hosts: 192.168.159.135
+  become: true
+  tasks:
+    - name: creating new partition on /dev/nvme0n2 and giving filesystem
+      parted:
+        device: /dev/nvme0n2
+        number: 1
+        state: present
+        fs_type: ext4
+...

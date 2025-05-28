@@ -1,0 +1,11 @@
+---
+- name: Example of givinig filesystem on alredy present partition using filesystem module
+  hosts: 192.168.159.135
+  become: true
+  tasks:
+    - name: giving ext2 filesystem to /dev/nvme0n2p1
+      filesystem:
+        fstype: ext2
+        dev: /dev/nvme0n2p1
+        force: true
+...
