@@ -1,0 +1,20 @@
+---
+- name: Example of adding ethernet, assigning ipv4 & ipv6 , adding 2 dns using nmcli module
+  hosts: node4
+  become: true
+  tasks:
+    - name: adding ethernet, ipv4, ipv6, two dns
+      community.general.nmcli:
+        conn_name: ens256
+        ifname: ens256
+        type: ethernet
+        ip4: 192.168.159.140/24
+        gw4: 192.168.159.1
+        dns4:
+          - 8.8.8.8
+          - 192.168.159.12
+        ip6: 2001:db8::cafe
+        gw6: 2001:db8::1
+        state: present
+        autoconnect: true
+...

@@ -1,0 +1,14 @@
+---
+- name: Example of adding ethernet connection with IPv4 (DHCP) allocation
+  hosts: node4
+  become: true
+  tasks:
+    - name: adding ethernet with dhcp allocation
+      community.general.nmcli:
+        conn_name: ens256
+        ifname: ens256
+        type: ethernet
+        method4: auto   # method4 for ipv4 & method6 for ipv6
+        state: present
+        autoconnect: true
+...

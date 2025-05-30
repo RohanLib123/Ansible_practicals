@@ -1,0 +1,12 @@
+---
+- name: Example of removing existing connection using nmcli module
+  hosts: node4
+  become: true
+  tasks:
+    - name: deleting existing connection
+      community.general.nmcli:
+        conn_name: ens256
+        ifname: ens256
+        type: ethernet
+        state: absent
+...
