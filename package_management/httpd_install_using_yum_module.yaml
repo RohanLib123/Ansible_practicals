@@ -1,0 +1,10 @@
+---
+- name: Example of install httpd using yum module
+  hosts: node4
+  become: true
+  tasks:
+    - name: installing httpd packege
+      yum:
+        name: httpd
+        state: latest
+...

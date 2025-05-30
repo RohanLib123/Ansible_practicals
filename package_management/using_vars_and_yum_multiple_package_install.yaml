@@ -1,0 +1,14 @@
+---
+- name: Example of insalling multiple packages which sotres in variables, using yum module
+  hosts: node4
+  become: true
+  tasks:
+    - name: Installing all packeges
+      yum:
+        name: "{{ packages }}"
+      vars:
+        packages:
+          - nginx
+          - postgresql
+          - postgresql-server
+...

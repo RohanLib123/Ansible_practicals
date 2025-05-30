@@ -1,0 +1,27 @@
+---
+- name: Example of 3  task in one 1) on icmp_block-inversion in public zone 2) in drop zone echo-request in icmp_block 3) redirect 443 to 8443 in public zone
+  hosts: node4
+  become: true
+  tasks:
+    - name: icmp_block_inervsion on in public zone
+      ansible.posix.firewalld:
+        zone: public
+        icmp_block_inversion: true
+        state: enabled
+        permanent: true
+        immediate: yes
+    - name: in drop zone set echo-request for icmp_block
+      ansible.posix.firewalld:
+        zone: drop
+        icmp_block: echo-request
+        state: enabled
+        permanent: true
+        immediate: yes
+    - name: redirect 443 to 8443 in public zone
+      ansible.posix.firewalld:
+        zone: public
+        rich_rule: rule family=ipv4 forward-port port=443 protocol=tcp to-port=8443
+        state: enabled
+        permanent: true
+        immediate: yes
+...

@@ -1,0 +1,13 @@
+---
+- name: Example of installing multiple packages using yum module
+  hosts: node4
+  become: true
+  tasks:
+    - name: install all packages
+      yum:
+        name:
+          - nginx
+          - postgresql
+          - postgresql-server
+        state: present
+...

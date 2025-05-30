@@ -1,0 +1,19 @@
+---
+- name: Example of adding rich rule and adding interface in trusted zone using firewalld module
+  hosts: node4
+  become: true
+  tasks:
+    - name: adding rich rule in default zone
+      ansible.posix.firewalld:
+        rich_rule: rule service name="ftp" audit limit value="1/m" accept
+        state: enabled
+        permanent: true
+        immediate: yes
+    - name: adding interface in trusted zone
+      ansible.posix.firewalld:
+        zone: trusted
+        interface: ens106
+        state: enabled
+        permanent: true
+        immediate: yes
+...

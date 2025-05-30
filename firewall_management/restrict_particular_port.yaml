@@ -1,0 +1,12 @@
+---
+- name: Example of restrict/disallow trafic of port 8081 in default zone using firewalld module
+  hosts: node4
+  become: true
+  tasks:
+    - name: disallowing traffic of port 8081 in default zone
+      ansible.posix.firewalld:
+        port: 8081/tcp
+        state: disabled
+        permanent: true
+        immediate: yes
+...

@@ -1,0 +1,11 @@
+---
+- name: Example of installing packge which is alredy downloded on local machine, using yum module
+  hosts: node4
+  become: true
+  tasks:
+    - name: Installing package from local machine
+      yum: 
+        name: /home/rohan/packages/nginx-release-centos.rpm  # this is path of your package which is on your local machine
+        state: present
+        disable_gpg_check: true
+...

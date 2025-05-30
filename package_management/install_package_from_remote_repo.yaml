@@ -1,0 +1,11 @@
+---
+- name: Example of installing package from remote repo
+  hosts: node4
+  become: true
+  tasks:
+    - name: Installing package from remote repo
+      yum:
+        name: http://nginx.org/packages/centos/8/x86_64/
+        state: present
+        disable_gpg_check: true
+...

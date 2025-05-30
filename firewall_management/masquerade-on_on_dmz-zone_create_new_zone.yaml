@@ -1,0 +1,18 @@
+---
+- name: Example of masquerade on in dmz zone and create new zone using firewalld module
+  hosts: node4
+  become: true
+  tasks:
+    - name: masquerade on in dmz zone
+      ansible.posix.firewalld:
+        masquerade: true
+        state: enabled
+        permanent: true
+        zone: dmz
+        immediate: yes
+    - name: creating new zone
+      ansible.posix.firewalld:
+        zone: rony
+        state: present
+        permanent: true
+...

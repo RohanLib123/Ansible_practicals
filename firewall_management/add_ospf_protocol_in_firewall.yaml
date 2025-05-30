@@ -1,0 +1,12 @@
+---
+- name: Example of adding ospf protocol into firewall using firewalld module
+  hosts: node4
+  become: true
+  tasks:
+    - name: adding ospf protocol into firewall
+      ansible.posix.firewalld:
+        protocol: ospf
+        state: enabled
+        permanent: true
+        immediate: yes
+...

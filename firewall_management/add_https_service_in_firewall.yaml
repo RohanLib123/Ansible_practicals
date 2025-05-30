@@ -1,0 +1,12 @@
+---
+- name: example of adding https service in firewall using firewalld module
+  hosts: node4
+  become: true
+  tasks:
+    - name: adding https service in firewall
+      ansible.posix.firewalld:
+        service: https
+        state: enabled
+        permanent: true
+        immediate: yes
+...
