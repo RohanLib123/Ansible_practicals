@@ -1,0 +1,74 @@
+---
+- name: Example of configuring apache https server using ansible playbook
+  hosts: node4
+  become: true
+  tasks:
+    - name: Setting hostname to managed host node
+      hostname:
+        name: node4.devops.local
+        use: systemd
+    - name: Installing apache & OpenSSL packages in the machine
+      package:
+        name:
+          - httpd
+          - openssl
+          - mod_ssl
+        state: latest
+    - name: Generating the private key file with the name as localhost.key
+      openssl_privatekey:
+        path: /etc/pki/tls/private/localhost.key
+        size: 2048
+    - name: Generating Certificate Sign Request (CSR)
+      community.crypto.x509_certificate:
+        path: '/etc/pki/tls/certs/localhost.crt'
+        privatekey_path: '/etc/pki/tls/private/localhost.key'
+        force: true
+        provider: selfsigned
+    - name: Creating /var/www/html/rohanweb/ directory for the document root
+      file:
+        path: /var/www/html/rohanweb/
+        mode: '0755'
+        state: directory
+    - name: Copying the file from ansible server to managed node at /var/www/html/rohanweb/logo.png
+      ansible.builtin.copy:
+        src: /home/rohan/Playbooks/apache_server/logo.png
+        dest: /var/www/html/rohanweb/logo.png
+        mode: '0644'
+    - name: Creating HTTPD configuration file in /etc/httpd/conf.d/ directory
+      copy:
+        dest: "/etc/httpd.conf.d/httpd.conf"
+        content: |
+          <VirtualHost *:443>
+          SSLEngine on
+          SSLCertificateFile /etc/pki/tls/certs/localhost.crt
+          SSLCertificateKeyFile /etc/pki/tls/private/localhost.key
+          ServerName node4.devops.local
+          DocumentRoot /var/www/html/rohanweb/
+          </VirtualHost>
+    - name: creating index.html inside /var/www/html/rohanweb/ directory
+      copy:
+        dest: "/var/www/html/rohanweb/index.html"
+        content: |
+          <h1> Rohan is a smart boy </h1>
+          <i> this website is hosted on node4 using apache server </i>
+          <img src="/home/rohan/Playbooks/apache_server/logo.png" width="300" height="300" />
+    - name: making change in /etc/httpd/conf.d/ssl.conf file (Set the ServerName)
+      lineinfile:
+        dest: /etc/httpd/conf.d/ssl.conf
+        regexp: '^#ServerName'
+        line: 'ServerName node4.devops.local:443'
+    - name: Allowing apache to modify /var/www/html/rohanweb/ directory. (SELinux Context)
+      command: restorecon -Rv /var/www/html/
+    - name: Allowing https traffic in firewall
+      firewalld:
+        service: https
+        zone: public
+        permanent: true
+        immediate: true
+        state: enabled
+    - name: Starting & enable httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: true
+...

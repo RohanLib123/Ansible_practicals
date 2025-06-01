@@ -1,0 +1,8 @@
+---
+- name: Configure HTTPS Apache server on RHEL-based system
+  hosts: https_servers
+  become: true
+
+  roles:
+    - apache_ssl
+

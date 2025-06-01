@@ -1,0 +1,18 @@
+<VirtualHost *:443>
+    ServerAdmin admin@example.com
+    DocumentRoot "/var/www/html"
+
+    SSLEngine on
+    SSLCertificateFile /etc/pki/tls/certs/cert.pem
+    SSLCertificateKeyFile /etc/pki/tls/certs/key.pem
+
+    <Directory "/var/www/html">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog logs/ssl_error_log
+    CustomLog logs/ssl_access_log combined
+</VirtualHost>
+

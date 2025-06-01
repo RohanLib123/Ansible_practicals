@@ -1,0 +1,2 @@
+[https_servers]
+node4  ansible_user=rohan ansible_become_password=rohan123 ansible_ssh_private_key_file=~/.ssh/id_rsa

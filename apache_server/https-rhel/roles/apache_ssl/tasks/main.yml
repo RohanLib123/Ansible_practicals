@@ -1,0 +1,29 @@
+---
+- name: Install Apache and SSL module
+  yum:
+    name:
+      - httpd
+      - mod_ssl
+    state: present
+
+- name: Copy SSL cert and key
+  copy:
+    src: "files/{{ item }}"
+    dest: "/etc/pki/tls/certs/{{ item }}"
+    mode: '0644'
+  loop:
+    - cert.pem
+    - key.pem
+
+- name: Deploy HTTPS virtual host config
+  template:
+    src: ssl.conf.j2
+    dest: /etc/httpd/conf.d/ssl.conf
+      #  notify: Restart Apache
+
+- name: Ensure Apache is running and enabled
+  service:
+    name: httpd
+    state: started
+    enabled: true
+
