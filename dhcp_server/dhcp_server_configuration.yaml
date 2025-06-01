@@ -1,0 +1,31 @@
+---
+- name: Example of configuring dhcp server on manages nodes
+  hosts: node4
+  become: true
+  tasks:
+    - name: setting up the stativ hostname to machine
+      hostname:
+        name: dhcp-server.rony.local
+        use: systemd
+    - name: Installing DHCP package in machine
+      dnf:
+        name: dhcp*
+        state: latest
+    - name: Copying the configuration file from ansible server to managed node at /etc/dhcp/dhcpd.conf using jinja2 template
+      template:
+        src: /home/rohan/Playbooks/dhcp_server/dhcp.conf.j2
+        dest: /etc/dhcp/dhcpd.conf
+        force: true
+    - name: Allowing dhcp service traffic in firewall
+      firewalld:
+        service: dhcp
+        zone: public
+        permanent: true
+        immediate: true
+        state: enabled
+    - name: Starting and enabling dhcpd service
+      service:
+        name: dhcpd
+        state: started
+        enabled: true
+...
