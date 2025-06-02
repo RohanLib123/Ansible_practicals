@@ -1,0 +1,24 @@
+- name: Install NFS utilities
+  yum:
+    name: nfs-utils
+    state: present
+
+- name: Create mount point
+  file:
+    path: /mnt/nfs_share
+    state: directory
+
+- name: Ensure rpcbind is running
+  service:
+    name: rpcbind
+    state: started
+    enabled: yes
+
+- name: Mount the NFS share
+  mount:
+    src: 192.168.159.132:/srv/nfs/shared
+    path: /mnt/nfs_share
+    fstype: nfs
+    opts: rw,sync
+    state: mounted
+

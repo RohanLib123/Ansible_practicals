@@ -1,0 +1,6 @@
+- name: Setup NFS Client on RHEL
+  hosts: nfs_client
+  become: true
+  roles:
+    - nfs_client
+

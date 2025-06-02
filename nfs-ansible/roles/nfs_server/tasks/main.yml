@@ -1,0 +1,42 @@
+- name: Install NFS packages
+  apt:
+    name:
+      - nfs-kernel-server
+    state: present
+    update_cache: true
+
+- name: Create shared directory
+  file:
+    path: /srv/nfs/shared
+    state: directory
+    owner: nobody
+    group: nogroup
+    mode: '0777'
+
+- name: Configure exports
+  copy:
+    dest: /etc/exports
+    content: "/srv/nfs/shared 192.168.159.135(rw,sync,no_subtree_check,no_root_squash)\n"
+
+- name: Export NFS shares
+  command: exportfs -ra
+
+- name: Enable and start required services
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+    - rpcbind
+    - nfs-kernel-server
+
+- name: Open required ports
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  loop:
+    - 2049
+    - 111
+  when: ansible_facts['distribution'] == "Ubuntu"
+

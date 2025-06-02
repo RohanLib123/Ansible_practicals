@@ -1,0 +1,6 @@
+- name: Setup NFS Server on Ubuntu
+  hosts: nfs_server
+  become: true
+  roles:
+    - nfs_server
+
