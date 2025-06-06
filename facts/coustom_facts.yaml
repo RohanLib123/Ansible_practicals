@@ -1,0 +1,15 @@
+---
+- name: Example of installing httpd using coustom facts
+  hosts: node4
+  become: true
+  tasks:
+    - name: Installing httpd package using coustom facts
+      package:
+        name: "{{ ansible_facts.ansible_local.httpd.basic.package}}"
+        state: latest
+    - name: starting and enabling httpd service
+      service:
+        name: "{{ ansible_facts.ansible_local.httpd.basic.service }}"
+        state: "{{ ansible_facts.ansible_local.httpd.basic.state }}"
+        enabled: "{{ ansible_facts.ansible_local.httpd.basic.enabled }}"
+...

@@ -1,0 +1,10 @@
+---
+- name: Example of checking kernel version and storing it in a file on managed nodes
+  hosts: all
+  become: true
+  tasks:
+    - name: checking kernel version and storing it in a file 
+      copy:
+        content: "The kernel version of this machine is {{ ansible_kernel }}"
+        dest: /tmp/kernel_version.txt
+...

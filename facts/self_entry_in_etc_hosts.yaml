@@ -1,0 +1,10 @@
+---
+- name: Example of creating an self machine entry in /etc/hosts file on managed nodes using facts
+  hosts: all
+  become: true
+  tasks:
+    - name: creating entry in /etc/hosts file
+      lineinfile:
+        line: "{{ ansible_default_ipv4.address }} {{ ansible_fqdn }} {{ ansible_hostname }}"
+        dest: /etc/hosts
+...

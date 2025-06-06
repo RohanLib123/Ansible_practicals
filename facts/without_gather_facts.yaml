@@ -1,0 +1,13 @@
+---
+- name: Example of not gathering facts
+  hosts: all
+  gather_facts: false 
+  tasks:
+    - name: Printing simple Hello Ansible message
+      debug:
+        msg: Hello Ansible 
+...
+# we can set option to not gather facts globally in /etc/ansible/ansible.cfg
+# syntax is 
+# [defaults]
+# gathering = explicit
