@@ -1,0 +1,16 @@
+---
+- name: Example of taking input from user and store it int variable
+  hosts: node4
+  become: true
+  vars_prompt:
+    - name: user_name
+      prompt: Please enter your username
+      private: no
+    - name: password
+      prompt: Please enter password
+      private: yes
+  tasks:
+    - name: showing username and password on screen using debug module
+      debug:
+        msg: "The username is {{ user_name }} & the password is {{ password }} ."
+...

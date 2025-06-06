@@ -1,0 +1,10 @@
+---
+- name: Example of printing user defined variables
+  hosts: node4
+  vars:
+    salutations: Hello Everyone
+  tasks:
+    - name: Printing user defined variable
+      debug:
+        msg: "{{ salutations }}"
+...

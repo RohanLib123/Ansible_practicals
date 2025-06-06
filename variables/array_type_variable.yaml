@@ -1,0 +1,17 @@
+---
+- name: Example of array type variable
+  hosts: node4
+  become: true
+  vars:
+    mypkgs:
+      - ftp
+      - vsftpd
+      - zsh
+      - telnet
+      - httpd
+  tasks:
+    - name: Installing the particular package
+      package:
+        name: "{{ mypkgs [3] }}"
+        state: installed
+...

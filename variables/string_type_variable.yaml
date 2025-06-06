@@ -1,0 +1,26 @@
+---
+- name: configuring apache server using string type varibles
+  hosts: node4
+  become: true
+  vars:
+    apache: httpd
+    apache_root: /var/www/html
+  tasks:
+    - name: Installing "{{ apache }}"
+      package:
+        name: "{{ apache }}"
+        state: installed
+    - name: Starting and enabling "{{ apache }}" service
+      service:
+        name: "{{ apache }}"
+        state: started
+        enabled: true
+    - name: Creating diretory "{{ apache_root }}"
+      file:
+        path: "{{ apache_root }}"
+        state: directory
+    - name: Creating index.html with content included
+      copy:
+        content: "Rohan is a smart boy"
+        dest: "{{ apache_root }}/index.html"
+...

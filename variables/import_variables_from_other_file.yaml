@@ -1,0 +1,25 @@
+---
+- name: Example of importing variables from another file
+  hosts: node4
+  become: true
+  vars_files:
+    - /home/rohan/Playbooks/variables/myvars.yaml
+  tasks:
+    - name: Installing "{{ apache }}"
+      package:
+        name: "{{ apache }}"
+        state: installed
+    - name: Starting and enabling "{{ apache }}" service
+      service:
+        name: "{{ apache }}"
+        state: started
+        enabled: true
+    - name: Creating "{{ apache_root }}" directory
+      file:
+        path: "{{ apache_root }}"
+        state: directory
+    - name: creating index.html file at "{{ apache_root }}" location
+      copy:
+        content: "Ansible is a great configuration management tool"
+        dest: "{{ apache_root }}/index.html"
+...

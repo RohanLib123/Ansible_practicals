@@ -1,0 +1,10 @@
+---
+- name: Example of printing values of buitin variables
+  hosts: all
+  become: true
+  tasks:
+    - name: printing values of builtin variable
+      debug:
+        msg: "{{ inventory_hostname }}"
+        msg: "{{ hostvars }}"
+...
