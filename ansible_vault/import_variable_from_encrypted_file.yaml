@@ -1,0 +1,13 @@
+---
+- name: example of importing variable from encypted file
+  hosts: node4
+  become: true
+  gather_facts: false
+  vars_files:
+    - /home/rohan/Playbooks/ansible_vault/var.yaml
+  tasks:
+    - name: Creating user on managed node
+      user:
+        name: sigma
+        password: "{{ pw }}"
+...
