@@ -1,0 +1,15 @@
+---
+- name: Example of adding multiple users but username is import from another file
+  hosts: node4
+  gather_facts: false
+  vars_files:
+    - /home/rohan/Playbooks/loops/users_list.yaml
+  tasks:
+    - name: adding multiple users with root privilage on managed node
+      user:
+        name: "{{ item }}"
+        state: present
+        groups: wheel
+      with_items:
+        - "{{ users }}"
+...

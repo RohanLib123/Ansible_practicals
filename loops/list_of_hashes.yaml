@@ -1,0 +1,17 @@
+---
+- name: Example of adding multiple users with assigning them diffrent diffrent groups
+  hosts: node4
+  become: true
+  gather_facts: false
+  tasks:
+    - name: adding users with their relevent group
+      user:
+        name: "{{ item.u_name }}"
+        state: present
+        groups: "{{ item.g_name }}"
+      loop:
+        - { u_name: 'aaa' , g_name: 'wheel' }
+        - { u_name: 'bbb' , g_name: 'wheel' }
+        - { u_name: 'ccc' , g_name: 'redhat' }
+        - { u_name: 'ddd' , g_name: 'redhat' }
+...

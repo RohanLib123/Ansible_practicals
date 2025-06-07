@@ -1,0 +1,16 @@
+---
+- name: Example of simple loop
+  hosts: node4
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Adding users on managed node
+      user:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - aaa
+        - bbb
+        - ccc
+        - ddd
+...

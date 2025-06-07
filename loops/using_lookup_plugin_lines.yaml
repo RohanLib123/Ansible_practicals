@@ -1,0 +1,13 @@
+---
+- name: Example of adding multiple users from another normal file using lookup plugin "lines"
+  hosts: node4
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Adding multiple users with root privilage on managed nodes
+      user:
+        name: "{{ item }}"
+        state: present
+        groups: wheel
+      with_lines: cat /home/rohan/Playbooks/loops/users
+... 

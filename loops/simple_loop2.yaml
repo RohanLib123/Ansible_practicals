@@ -1,0 +1,18 @@
+---
+- name: Example of adding multiuple user with root privilage 
+  hosts: node4
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Adding users with admin root privilage
+      user:
+        name: "{{ item }}"
+        state: present
+        groups: wheel
+      loop:
+        - aaa
+        - bbb
+        - ccc
+        - ddd
+...
+# Here we can use group: keyword to assigning primary group & groups: keyword to assign secondary group
