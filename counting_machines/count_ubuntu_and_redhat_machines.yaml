@@ -1,0 +1,41 @@
+- name: Group hosts by OS type
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Get host facts
+      ansible.builtin.setup:
+        gather_subset:
+          - "hardware"
+          - "network"
+          - "virtual"
+          - "facter"
+          - "ohai"
+      delegate_to: "{{ item }}"
+      delegate_facts: true
+      loop: "{{ groups['all'] }}"
+
+    - name: Add Ubuntu hosts to group
+      add_host:
+        name: "{{ item }}"
+        groups: ubuntu_hosts
+      when: hostvars[item].ansible_distribution == "Ubuntu"
+      loop: "{{ groups['all'] }}"
+
+    - name: Add RedHat hosts to group
+      add_host:
+        name: "{{ item }}"
+        groups: redhat_hosts
+      when: hostvars[item].ansible_distribution == "RedHat"
+      loop: "{{ groups['all'] }}"
+- name: Report counts
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Count Ubuntu machines
+      debug:
+        msg: "Ubuntu machines count: {{ groups['ubuntu_hosts'] | default([]) | length }}"
+
+    - name: Count RedHat machines
+      debug:
+        msg: "RedHat machines count: {{ groups['redhat_hosts'] | default([]) | length }}"
+...
