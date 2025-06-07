@@ -1,0 +1,14 @@
+---
+- name: Example of installing ftp when machine RedHat or CentOS
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Installing ftp RedHat or CentOS machine
+      package:
+        name: ftp
+        state: present
+      when:  ansible_distribution == 'RedHat' or ansible_distribution == 'CentOS'
+...
+# when both fatcs are same in condtion then we can write alos by this way
+# when: ansible_distribution == 'RedHat' or 'CentOS'

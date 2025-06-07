@@ -1,0 +1,16 @@
+---
+- name: Example of Install ftp for specific verion of os and specific os using AND operator
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Installing ftp on redhat machine having major version 9
+      package:
+        name: ftp
+        state: present
+      when: ansible_distribution == 'RedHat' and ansible_distribution_major_version == "9"
+...
+# We can write above AND condition in this way also
+# when:
+#   - ansible_distribution == 'RedHat'
+#   - ansible_distribution_major_version == "9"

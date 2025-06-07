@@ -1,0 +1,12 @@
+---
+- name: Install apache when machine is RedHat and version is 9 or machine is CentOS and version is 8
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Installing ftp for Redhat machine having version 9 or CentOS machine having version 8
+      package:
+        name: httpd
+        state: present
+      when: (ansible_distribution == 'RedHat' and ansible_distribution_major_version == '9') or (ansible_distribution == 'CentOS' and ansible_distribution_major_version == '8')
+...
