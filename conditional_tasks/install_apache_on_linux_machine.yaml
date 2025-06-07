@@ -1,0 +1,17 @@
+---
+- name: Example of installing apache on machine based on distribution
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Installing apache in RedHat machines
+      package:
+        name: httpd
+        state: present
+      when: ansible_distribution == 'RedHat'
+    - name: Installing apache in ubuntu machines
+      package:
+        name: apache2
+        state: present
+      when: ansible_distribution == 'Ubuntu'
+...

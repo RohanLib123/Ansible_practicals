@@ -1,0 +1,14 @@
+---
+- name: Example of checking os of manages nodes using conditional operator
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Checking OS of machine for ubuntu
+      debug:
+        msg: "This is Ubuntu Machine"
+      when: ansible_distribution == 'Ubuntu'
+    - name: checking OS of machine RedHat
+      debug:
+        msg: "This is RHEL machine" 
+      when: ansible_distribution == 'RedHat'
+...
