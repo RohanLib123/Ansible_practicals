@@ -1,0 +1,18 @@
+---
+- name: Example of stat module to check file is exits or not at particular location & if file does not exits then create it.
+  hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+    - name: checking file is exists or not at location
+      stat:
+        path: /tmp/rony.txt
+      register: res
+        #    - debug:
+        #        var: res.stat.exists
+    - name: creating file if not exists
+      copy:
+        content: "Ansible is a great configuration management tool"
+        dest: /tmp/rony.txt
+      when: res.stat.exists == false
+...

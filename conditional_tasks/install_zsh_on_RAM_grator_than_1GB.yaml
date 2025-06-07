@@ -1,0 +1,12 @@
+--- 
+- name: Installing the zsh package on machine having RAM grator than 1GB 
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Installing package on machine have RAM grator than 1GB
+      package:
+        name: zsh
+        state: absent
+      when: ansible_memtotal_mb > 1024
+...

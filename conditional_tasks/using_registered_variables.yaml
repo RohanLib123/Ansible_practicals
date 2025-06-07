@@ -1,0 +1,16 @@
+---
+- name: Example of install vsftpd using registered variables (without gather facts) on particular machine
+  hosts: all
+  become: true
+  tasks:
+    - name: Checking os version using /etc/redhat-release file
+      command: cat /etc/redhat-release
+      register: os_version
+        #    - debug:
+        #        var: os_version
+    - name: installing vsftpd on "Red Hat Enterprise Linux 9.5 (Plow)" using registered variable 
+      package:
+        name: vsftpd
+        state: present
+      when: os_version.stdout == 'Red Hat Enterprise Linux release 9.5 (Plow)'
+...
