@@ -1,0 +1,20 @@
+---
+- name: Example os using block and rescue
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - block:
+       - name: Installing the epel.repo repository from RPM
+         command: sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm -y
+
+       - name: Checking epel.repo is present or not
+         shell: ls /etc/yum.repos.d/epel.repo
+      when: ansible_distribution_major_version == '9' and ansible_distribution == 'RedHat'
+      rescue:
+       - name: Copying epel.repo file from ansible control node to managed node
+         copy:
+           src: /tmp/epel.repo
+           dest: /etc/yum.repos.d/epel.repo
+...
+# if rpm url is correct then it will install the epel repo from that url & if the url is wrong or not reachable then it will go in resuce mode and as mentioned in rescue mode it will copy the epel.repo file from ansible control node to managed node
