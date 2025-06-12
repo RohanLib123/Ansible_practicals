@@ -1,0 +1,7 @@
+The list of fruits is :
+{% for item in fruits  %}
+{{ item | lower }}
+{% endfor %}
+{#Comments#}
+{# when we use {{ item | upper }} --> that string will save in upper case on managed node#}
+{# when we use {{ item | lower }} --> that string will save in lower case on managed node#}

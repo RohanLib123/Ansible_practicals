@@ -1,0 +1,9 @@
+---
+- name: Example of replacing a string using filters of Jinja2
+  hosts: node4
+  tasks:
+    - name: Replacing string using jinja2
+      template:
+        src: /home/rohan/Playbooks/jinja2/string.j2
+        dest: /home/rohan/string.txt
+...

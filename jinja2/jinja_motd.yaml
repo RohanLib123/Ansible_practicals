@@ -1,0 +1,11 @@
+---
+- name: Example of copying jinja2 template on managed nodes using template module
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - name: copying the MOTD file to managed nodes
+      template:
+        src: /home/rohan/Playbooks/jinja2/motd.j2
+        dest: /etc/motd
+...

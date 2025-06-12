@@ -1,0 +1,9 @@
+---
+- name: example of findin min number and max number usin jinja template and filter
+  hosts: node4
+  tasks:
+    - name: Finding min/max number
+      template: 
+        src: /home/rohan/Playbooks/jinja2/numbers.j2
+        dest: /home/rohan/numbers.txt
+...

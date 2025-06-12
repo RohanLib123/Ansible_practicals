@@ -1,0 +1,16 @@
+---
+- name: example of for loop using jinja template
+  hosts: node4
+  vars:
+    fruits:
+      - mango
+      - apple
+      - watermelon
+      - strawberry
+      - banana
+  tasks:
+    - name: using for loop
+      template:
+        src: /home/rohan/Playbooks/jinja2/fruits.j2
+        dest: /home/rohan/fruits.txt
+...

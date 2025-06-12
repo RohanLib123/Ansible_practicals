@@ -1,0 +1,33 @@
+---
+- name: Example of configuring apache serevr on managed nodes using jinja2 template
+  hosts: ubuntu
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Installing apache2 on managed nodes
+      package:
+        name: apache2
+        state: latest
+    - name: Staring and enabling httpd service
+      service:
+        name: apache2
+        state: started
+        enabled: true
+    - name: Copying configuration file from ansible control node to managed nodes
+      template:
+        src: /home/rohan/Playbooks/jinja2/index.j2
+        dest: /var/www/html/index.html
+    - name: Restarting the httpd service
+      service:
+        name: apache2
+        state: restarted
+    - name: adding service to firewall
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+    - name: Reloading firewalld
+      service:
+        name: firewalld
+        state: reloaded
+... 
