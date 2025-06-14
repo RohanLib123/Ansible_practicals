@@ -11,7 +11,6 @@
       copy:
         src: files/index.html
         dest: /var/www/html/index.html
-      when: ansible_distribution == 'Ubuntu'
 
     - name: adding apache in firewall
       firewalld:
