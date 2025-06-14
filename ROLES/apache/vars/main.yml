@@ -1,0 +1,18 @@
+#SPDX-License-Identifier: MIT-0
+---
+# vars file for apache
+# var for installing
+name: apache2
+state: present
+
+# var for restar
+res: restarted
+enabled: true
+
+#var for firewall
+f_service: http
+f_state: enabled
+
+#var for firewall reload
+s_name: firewalld
+s_state: reloaded

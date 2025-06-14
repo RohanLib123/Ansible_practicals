@@ -1,0 +1,30 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for apache
+- block:
+    - name: Install apache2
+      package:
+        name: "{{ name }}"
+        state: "{{ state }}"
+
+    - name: copying index.html files to /var/www/html/index.html
+      copy:
+        src: files/index.html
+        dest: /var/www/html/index.html
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: adding apache in firewall
+      firewalld:
+        zone: public
+        service: "{{ f_service }}"
+        state: "{{ f_state }}"
+        permanent: yes
+        immediate: yes
+
+      notify:
+        - restart apache
+
+      notify:
+        - reload firewalld
+
+  when: ansible_distribution == 'Ubuntu'
