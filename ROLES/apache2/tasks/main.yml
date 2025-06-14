@@ -1,0 +1,25 @@
+---
+- name: Install Apache
+  ansible.builtin.package:
+    name: "{{ apache_package }}"
+    state: present
+
+- name: Copy index.html to web root
+  ansible.builtin.copy:
+    src: index.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Deploy Apache configuration
+  ansible.builtin.template:
+    src: apache.conf.j2
+    dest: "/etc/{{ apache_package }}/sites-available/000-default.conf"
+  notify: Restart Apache
+
+- name: Ensure Apache is started and enabled
+  ansible.builtin.service:
+    name: "{{ apache_service }}"
+    state: started
+    enabled: true
