@@ -1,0 +1,5 @@
+---
+- name: Example of checking connectivity using ping module
+  hosts: all
+  roles: 
+    - ping

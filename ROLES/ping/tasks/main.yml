@@ -1,0 +1,9 @@
+---
+- name: checking connectivity between managed nodes
+  ansible.builtin.ping:
+  register: reg
+
+- name: show output on screen
+  ansible.builtin.debug:
+    msg: "{{ reg }}"
+    
