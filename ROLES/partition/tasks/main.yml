@@ -1,0 +1,9 @@
+---
+# tasks file for partition
+- name: creating partition on /dev/sda
+  parted:
+    device: /dev/sda
+    number: 1
+    state: present
+    fs_type: ext4
+  notify: partprobe

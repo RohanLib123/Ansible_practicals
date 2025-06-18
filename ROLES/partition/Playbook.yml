@@ -1,0 +1,6 @@
+---
+- name: Creating partition using parted module
+  hosts: node4
+  become: true
+  roles:
+    - partition
