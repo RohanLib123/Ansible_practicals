@@ -1,0 +1,7 @@
+---
+- name: mouting DVD on /tmp in read only mode
+  hosts: node4
+  become: true
+  gather_facts: false
+  roles:
+    - dvd-mount

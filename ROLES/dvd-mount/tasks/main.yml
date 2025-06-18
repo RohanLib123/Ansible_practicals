@@ -1,0 +1,9 @@
+---
+# tasks file for dvd-mount
+- name: Mount DVD on /tmp read only
+  ansible.builtin.mount:
+    path: /tmp
+    src: /dev/sr0
+    fstype: iso9660
+    opts: ro
+    state: mounted
