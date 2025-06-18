@@ -1,0 +1,4 @@
+---
+# handlers file for partition-gb
+- name: partprobe
+  command: partprobe
