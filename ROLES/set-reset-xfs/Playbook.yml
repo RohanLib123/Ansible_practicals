@@ -1,0 +1,7 @@
+---
+- name: set/reset xfs filesystem and generate uuid
+  hosts: node4
+  become: true
+  gather_facts: false
+  roles:
+    - set-reset-xfs

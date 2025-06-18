@@ -1,0 +1,8 @@
+---
+# tasks file for set-reset-xfs
+- name: Set/Reset xfs filesystem UUID on /dev/sda1
+  filesystem:
+    fstype: xfs
+    dev: /dev/sda1
+    uuid: generate
+...
