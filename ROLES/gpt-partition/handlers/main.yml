@@ -1,0 +1,4 @@
+---
+# handlers file for gpt-partition
+- name: partprobe
+  command: partprobe

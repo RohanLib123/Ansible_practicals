@@ -1,0 +1,18 @@
+---
+# tasks file for gpt-partition
+- name: creating partition for lvm of gpt label
+  parted:
+    label: gpt
+    device: /dev/sda
+    number: 6
+    name: p1
+    fs_type: ext4 
+    flags: [ lvm ]
+    part_start: 0%
+    part_end: 10%
+    unit: '%'
+    state: present
+  
+  notify:
+    - partprobe
+...
