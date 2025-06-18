@@ -1,0 +1,7 @@
+---
+- name: creating partition of 1Gb at the end of the disk while removing old partition
+  hosts: node4
+  become: true
+  gather_facts: false
+  roles:
+    - partition-at-end

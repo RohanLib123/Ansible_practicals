@@ -1,0 +1,19 @@
+---
+# tasks file for partition-at-end
+- name: removing old partition number 2 created in partiton-lvm role
+  parted:
+    device: /dev/sda
+    number: 2
+    state: absent
+
+- name: creating partition 3 of 1GB at the end of the disk
+  parted:
+    device: /dev/sda
+    number: 3
+    fs_type: ext3
+    part_start: -1GiB
+    state: present
+  
+  notify:
+    - partprobe
+...

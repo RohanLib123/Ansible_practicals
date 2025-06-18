@@ -1,0 +1,4 @@
+---
+# handlers file for partition-at-end
+- name: partprobe
+  command: partprobe
