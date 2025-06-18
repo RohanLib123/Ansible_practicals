@@ -1,0 +1,8 @@
+---
+# tasks file for filesystem-type
+- name: creating filesystem ext4 on /dev/sda1
+  filesystem:
+    fstype: ext4
+    dev: /dev/sda1
+    force: true
+...

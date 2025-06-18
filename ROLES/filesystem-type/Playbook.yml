@@ -1,0 +1,7 @@
+---
+- name: Creating filesystem for existing partiton
+  hosts: node4
+  become: true
+  gather_facts: false
+  roles:
+    - filesystem-type
