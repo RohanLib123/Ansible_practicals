@@ -1,0 +1,12 @@
+---
+# tasks file for partition-lvm
+- name: creating parttion for lvm starting from 1gb
+  parted:
+    device: /dev/sda
+    number: 2
+    part_start: 1GiB
+    flags: [ lvm ]
+    fs_type: ext4
+    state: present
+  notify: partprobe
+...
