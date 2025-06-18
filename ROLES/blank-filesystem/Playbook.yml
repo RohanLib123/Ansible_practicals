@@ -1,0 +1,7 @@
+---
+- name: creating blank filesystem or erasing existing filesystem
+  hosts: node4
+  become: true
+  gather_facts: false
+  roles:
+    - blank-filesystem

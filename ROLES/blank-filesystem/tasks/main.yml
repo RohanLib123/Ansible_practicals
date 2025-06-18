@@ -1,0 +1,6 @@
+---
+# tasks file for blank-filesystem
+- name: creating a blank filesystem
+  filesystem:
+    dev: /dev/sda1
+    state: absent
