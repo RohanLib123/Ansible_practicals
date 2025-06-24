@@ -1,0 +1,18 @@
+---
+# tasks file for rich-rule-and-interface-add
+- name: adding rich rule in public zone
+  ansible.posix.firewalld:
+    zone: public
+    rich_rule: rule service name="ftp" audit limit value="1/m" accept
+    state: enabled
+    permanent: true
+    immediate: yes
+
+- name: adding ens160 interface in trusted zone
+  ansible.posix.firewalld:
+    zone: trusted
+    interface: ens160
+    state: enabled
+    permanent: true
+    immediate: yes
+...

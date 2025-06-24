@@ -1,0 +1,7 @@
+---
+- name: Example of adding rich rule in public zone and adding ens160 interface in trusted zone using firewalld modoul in role
+  hosts: node4
+  become: true
+  gather_facts: false
+  roles:
+    - rich-rule-and-interface-add 
