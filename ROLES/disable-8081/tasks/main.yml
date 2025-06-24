@@ -1,0 +1,10 @@
+---
+# tasks file for disable-8081
+- name: disable traffic from 8081/tcp port in firewall
+  ansible.posix.firewalld:
+    zone: public
+    port: 8081/tcp
+    permanent: true
+    state: disabled
+    immediate: yes
+...

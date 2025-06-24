@@ -1,0 +1,7 @@
+---
+- name: Example of disabling traffic from 8081/tcp port using firewalld module in role
+  hosts: node4
+  become: true
+  gather_facts: false
+  roles:
+    - disable-8081
