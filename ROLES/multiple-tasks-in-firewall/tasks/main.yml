@@ -1,0 +1,27 @@
+---
+# tasks file for multiple-tasks-in-firewall
+- name: making icmp_block_inversion on in public zone
+  ansible.posix.firewalld:
+    zone: public
+    state: enabled
+    permanent: true
+    icmp_block_inversion: true
+    immediate: yes
+
+- name: making icmp_block echo-request in drop zone
+  ansible.posix.firewalld:
+    zone: drop
+    state: enabled
+    permanent: true
+    icmp_block: echo-request
+    immediate: true
+
+- name: redirect prot 443 to 8443 with rich rule in public zone
+  ansible.posix.firewalld:
+    zone: public
+    rich_rule: rule family=ipv4 forward-port port=443 protocol=tcp to-port=8443
+    state: enabled
+    permanent: true
+    immediate: yes
+...
+

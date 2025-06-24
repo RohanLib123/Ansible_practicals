@@ -1,0 +1,7 @@
+---
+- name: example of performing multiple tasks in firewall with specific zones using firewalld module in role
+  hosts: node4
+  become: true
+  gather_facts: false
+  roles:
+    - multiple-tasks-in-firewall
