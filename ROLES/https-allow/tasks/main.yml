@@ -1,0 +1,10 @@
+---
+# tasks file for https-allow
+- name: allowing https traffic in firewall in public zone
+  ansible.posix.firewalld:
+    zone: public
+    service: https
+    state: enabled
+    permanent: true
+    immediate: yes
+...
