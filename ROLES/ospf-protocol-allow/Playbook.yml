@@ -1,0 +1,7 @@
+---
+- name: example of allowing ospf protocol in firewall using firewalld module in role
+  hosts: node4
+  become: true
+  gather_facts: false
+  roles:
+    - ospf-protocol-allow

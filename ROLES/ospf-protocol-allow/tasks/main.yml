@@ -1,0 +1,10 @@
+---
+# tasks file for ospf-protocol-allow
+- name: allowing ospf protocol in firewall in public zone
+  ansible.posix.firewalld:
+    zone: public
+    protocol: ospf
+    state: enabled
+    permanent: true
+    immediate: yes
+...
