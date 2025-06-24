@@ -1,0 +1,7 @@
+---
+- name: example of add 161-162/udp port in public zone and https service in dmz zone using firewalld module in role
+  hosts: node4
+  become: true
+  gather_facts: false
+  roles:
+    - udp-and-https-add

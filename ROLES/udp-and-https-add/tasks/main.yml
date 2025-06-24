@@ -1,0 +1,18 @@
+---
+# tasks file for udp-and-https-add
+- name: enabling udp 161-162/udp in public zone
+  ansible.posix.firewalld:
+    zone: public
+    port: 161-162/udp
+    state: enabled
+    permanent: true
+    immediate: yes
+
+- name: enabling https service in dmz zone
+  ansible.posix.firewalld:
+    zone: dmz
+    service: https
+    state: enabled
+    permanent: true
+    immediate: yes
+...
