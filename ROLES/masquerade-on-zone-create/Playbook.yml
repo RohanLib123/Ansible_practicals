@@ -1,0 +1,7 @@
+---
+- name: example of enabling masquerade in dmz zone and creating new coustom zone using firewalld module in role
+  hosts: node4
+  become: true
+  gather_facts: false
+  roles:
+    - masquerade-on-zone-create

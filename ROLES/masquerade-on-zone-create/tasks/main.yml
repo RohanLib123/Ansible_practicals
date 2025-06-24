@@ -1,0 +1,16 @@
+---
+# tasks file for masquerade-on-zone-create
+- name: masquerade on in dmz zone 
+  ansible.posix.firewalld:
+    zone: dmz
+    masquerade: true
+    state: enabled
+    permanent: true
+    immediate: yes
+
+- name: creating new coustom zone
+  ansible.posix.firewalld:
+    zone: coustom
+    state: present
+    permanent: true
+...
